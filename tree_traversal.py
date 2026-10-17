@@ -30,20 +30,31 @@ def postorder(node):
     postorder(node.right)
     print(node.value)
 def level_order(root):
+    if root is None:
+        return []
     queue = deque([root])
+    result = []
     while len(queue) != 0:
         node = queue.popleft()
-        print(node.value)
+        result.append(node.value)
         if node.left is not None:
-            queue.append(node.left)
+           queue.append(node.left)
         if node.right is not None:
             queue.append(node.right)
-
+    return result
+def bst_min(node):
+    if node is None:
+        return None
+    if node.left is None:
+        return node.value
+    return bst_min(node.left)
 print("Inorder:")
 inorder(root)
 print("Preorder:")
 preorder(root)
 print("Postorder:")
 postorder(root)
-print("Level order:")
-level_order(root)
+print(level_order(root))   # expected: [8, 3, 10, 1, 6, 14]
+print(level_order(None))   # expected: []
+print(bst_min(root))    # expected: 20
+print(bst_min(None))    # expected: None
