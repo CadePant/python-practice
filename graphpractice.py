@@ -20,18 +20,26 @@ def bfs(graph,start):
     visited = set()
     visited.add(start)
     result = []
-    while len(queue) != 0:
+    while queue:
         node = queue.popleft()
         result.append(node)
-        for item in graph[node]:
-            if item not in visited:
-                queue.append(item)
-                visited.add(item)
+        for neighbor in graph[node]:
+            if neighbor not in visited:
+                queue.append(neighbor)
+                visited.add(neighbor)
     return result
-
+def dfs(graph,node,visited,result):
+    visited.add(node)
+    result.append(node)
+    for neighbor in graph[node]:
+        if neighbor not in visited:
+            dfs(graph,neighbor,visited,result)
+    return result
 
 
 
 print(most_connected(graph))  # expected: D
 print(bfs(graph, "A"))  # expected: ['A', 'B', 'C', 'D', 'E']
 print(bfs(graph, "E"))  # expected: ['E', 'D', 'B', 'C', 'A']
+print(dfs(graph, "A", set(), []))  # expected: ['A', 'B', 'D', 'C', 'E']
+print(dfs(graph, "E", set(), []))
