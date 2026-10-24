@@ -1,19 +1,11 @@
-class Node:
-    def __init__(self, value):
-        self.value = value
-        self.next = None
+import heapq
 
-head = Node(5)
-head.next = Node(10)
-head.next.next = Node(15)
+def smallest_two(nums):
+    heap = []
+    for n in nums:
+        heapq.heappush(heap, n)
+    first = heapq.heappop(heap)
+    second = heapq.heappop(heap)
+    return [first, second]
 
-def contains(head, target):
-    current = head
-    while current is not None:
-        if current.value == target:
-            return True
-        current = current.next
-    return False
-
-print(contains(head, 15))  # expected: True
-print(contains(head, 99))  # expected: False
+print(smallest_two([8, 3, 10, 1, 6]))  # expected: [1, 3]
