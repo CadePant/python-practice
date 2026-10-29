@@ -30,7 +30,18 @@ def next_tickets(tickets, k):
         result.append(variable[1])
     return result
 
+def k_largest(nums,k):
+    heap = []
+    for n in nums:
+        heapq.heappush(heap,-n)
+    result = []
+    for i in range(k):
+        top = heapq.heappop(heap)
+        result.append(-top)
+    return result
+
 print(next_tickets(tickets, 2))   # expected: ['Site is down', "Can't log in"]
 
 print(k_smallest([8, 3, 10, 1, 6], 3))   # expected: [1, 3, 6]
 print(k_smallest([5, 2, 9], 1))          # expected: [2]
+print(k_largest([4, 15, 9, 1, 12], 3))   # expected: [15, 12, 9]
